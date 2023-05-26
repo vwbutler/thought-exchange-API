@@ -1,0 +1,17 @@
+{
+  "name": "thought-exchange-api",
+  "version": "1.0.0",
+  "description": "An API for a social network web application where users can share their thoughts, react to friends’ thoughts, and create a friend list.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongodb": "^5.5.0",
+    "mongoose": "^7.2.1"
+  }
+}
