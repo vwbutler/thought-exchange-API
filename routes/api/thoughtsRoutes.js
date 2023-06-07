@@ -1,33 +1,33 @@
-const express = require("express");
-const router = express.Router();
-
-// thoughts
-
-router.get("/", (req, res) => {
-  // Handle GET request for all thoughts
-  // Retrieve thoughts from the database and send them as a response
-});
-
-// Export the router
-module.exports = router;
-
 const router = require("express").Router();
 const {
-  getCourses,
-  getSingleCourse,
-  createCourse,
-  updateCourse,
-  deleteCourse,
-} = require("../../controllers/courseController.js");
+  getAllThoughts,
+  getThoughtById,
+  createThought,
+  updateThought,
+  deleteThought,
+  createReaction,
+  deleteReaction,
+} = require("../../controllers/thoughtController");
 
-// /api/courses
-router.route("/").get(getCourses).post(createCourse);
+// GET /api/thoughts
+router.get("/", getAllThoughts);
 
-// /api/courses/:courseId
-router
-  .route("/:courseId")
-  .get(getSingleCourse)
-  .put(updateCourse)
-  .delete(deleteCourse);
+// GET /api/thoughts/:thoughtId
+router.get("/:thoughtId", getThoughtById);
+
+// POST /api/thoughts
+router.post("/", createThought);
+
+// PUT /api/thoughts/:thoughtId
+router.put("/:thoughtId", updateThought);
+
+// DELETE /api/thoughts/:thoughtId
+router.delete("/:thoughtId", deleteThought);
+
+// POST /api/thoughts/:thoughtId/reactions
+router.post("/:thoughtId/reactions", createReaction);
+
+// DELETE /api/thoughts/:thoughtId/reactions/:reactionId
+router.delete("/:thoughtId/reactions/:reactionId", deleteReaction);
 
 module.exports = router;
