@@ -47,12 +47,45 @@ const thoughtController = {
     }
   },
 
-  deleteThought(req, res) {
-    // Implement the logic to delete a thought by its _id
+  async deleteThought(req, res) {
+    try {
+      const deleteThought = await Thought.findOneAndDelete({
+        _id: req.params.thoughtId,
+      });
+
+      if (!deleteThought) {
+        return res
+          .status(404)
+          .json({ message: "No thought found with that ID :(" });
+      }
+      res.json(deletedThought);
+    } catch (err) {
+      console.log(err);
+      res.status(500).json(err);
+    }
   },
-  createReaction(req, res) {
-    // Implement the logic to create a reaction stored in a single thought's reactions array field
+
+  async createReaction(req, res) {
+    console.log("You are adding a reaction");
+    console.log(req.body);
+    try {
+      const reaction = await Thought.findOneAndUpdate(
+        { _id: req.params.thoughtId },
+        { $addToSet: { reaction: req.params.reactionId } },
+        { runValidators: true, new: true }
+      );
+      if (!reaction) {
+        return res
+          .status(404)
+          .json({ message: "No thought found with that ID :(" });
+      }
+      res.json(reaction);
+    } catch (err) {
+      console.log(err);
+      res.status(500).json(err);
+    }
   },
+
   deleteReaction(req, res) {
     // Implement the logic to pull and remove a reaction by the reaction's reactionId value
   },
