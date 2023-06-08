@@ -13,7 +13,7 @@ const ThoughtSchema = new Schema({
     type: Date,
     default: Date.now,
     get: function (timestamp) {
-      return dayjs(timestamp).format("YYYY-MM-DD HH:mm:ss");
+      return dayjs(timestamp).format("dddd, MMMM D, YYYY");
     },
   },
   username: {
